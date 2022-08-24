@@ -1,4 +1,4 @@
-package parser
+package model
 
 type DataTransaction struct {
 	Block  string `json:"block"`
