@@ -2,6 +2,7 @@ package asset
 
 import (
 	"EthereumDataMiner/db"
+	"EthereumDataMiner/robot"
 )
 
 var thresholdContracts = [...]string{
@@ -17,4 +18,6 @@ func GetThresholdInfo() {
 		}
 		db.InsertOneDayInfo(info.date, info.contract, info.supply, info.price)
 	}
+
+	robot.DispatchThresholdInfo("xxx")
 }
