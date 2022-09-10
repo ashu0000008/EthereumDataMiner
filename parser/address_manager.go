@@ -12,7 +12,7 @@ func isAddressContract(addr common.Address) int {
 		return isContract
 	}
 
-	client := getClient()
+	client := GetClient()
 	code, err := client.CodeAt(context.Background(), addr, nil)
 	if nil == err {
 		var result = 0

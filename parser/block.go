@@ -10,7 +10,7 @@ import (
 )
 
 func GetBlockInfo(blockNumber uint64) {
-	client := getClient()
+	client := GetClient()
 
 	blockInfo, err := client.BlockByNumber(context.Background(), new(big.Int).SetUint64(blockNumber))
 	if nil != err {

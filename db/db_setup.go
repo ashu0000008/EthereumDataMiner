@@ -11,7 +11,7 @@ func SetupDb() (*sql.DB, error) {
 	dbUser := "root"
 	dbPasswd := "Ashu_000"
 	dbHost := "47.98.54.147:3306"
-	dbName := "eth_transaction"
+	dbName := "AssetSeeker"
 	dbConnection := "tcp"
 	connectionString := dbUser + ":" + dbPasswd + "@" + dbConnection + "(" + dbHost + ")" + "/" + dbName + "?charset=utf8"
 

@@ -1,0 +1,2 @@
+abigen --abi tbtcv2_abi.json --pkg tbtcv2 --out ./contract_tbtcv2.go
+

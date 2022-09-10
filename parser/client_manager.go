@@ -9,7 +9,7 @@ const EthNode = "https://eth-mainnet.alchemyapi.io/v2/tZXSQKLFyzp2n5p5COu4zO0EEO
 
 var mEthClient *ethclient.Client = nil
 
-func getClient() *ethclient.Client {
+func GetClient() *ethclient.Client {
 	if nil != mEthClient {
 		return mEthClient
 	}
