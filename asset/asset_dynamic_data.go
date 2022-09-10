@@ -1,35 +1,39 @@
 package asset
 
 import (
-	"EthereumDataMiner/asset/tbtcv2"
-	"EthereumDataMiner/db"
+	"EthereumDataMiner/asset/erc20"
 	"EthereumDataMiner/parser"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 )
 
-const thresholdContract = "0x18084fbA666a33d37592fA2633fD49a74DD93a88"
+type CoinDynamicData struct {
+	contract string
+	date     string
+	supply   big.Float
+	price    big.Float
+}
 
-func GetThresholdDynamicData() {
+func GetThresholdDynamicData(contractAddress string) *CoinDynamicData {
 	client := parser.GetClient()
-	contract, err := tbtcv2.NewContract(common.HexToAddress(thresholdContract), client)
+	contract, err := erc20.NewErc20(common.HexToAddress(contractAddress), client)
 	if nil != err {
-		return
+		return nil
 	}
 
 	decimal, err := contract.Decimals(nil)
 	if nil != err {
-		return
+		return nil
 	}
 
 	totalSupply, err := contract.TotalSupply(nil)
 	if nil != err {
-		return
+		return nil
 	}
 
 	totalSupplyFloat := GetBalance(totalSupply, decimal)
 	println(totalSupplyFloat)
 
 	dataNow := GetDateNow()
-	db.InsertOneDayInfo(dataNow, thresholdContract, *totalSupplyFloat, *big.NewFloat(0))
+	return &CoinDynamicData{contract: contractAddress, date: dataNow, supply: *totalSupplyFloat, price: *big.NewFloat(0)}
 }

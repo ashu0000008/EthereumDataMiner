@@ -4,7 +4,7 @@ import "EthereumDataMiner/asset"
 
 func main() {
 
-	asset.GetThresholdDynamicData()
+	asset.GetThresholdInfo()
 
 	//taskThreshold := func() {
 	//	fmt.Println("taskThreshold start------> ", time.Now())
