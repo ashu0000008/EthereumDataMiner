@@ -3,6 +3,7 @@ package asset
 import (
 	"EthereumDataMiner/db"
 	"EthereumDataMiner/robot"
+	"fmt"
 )
 
 var thresholdContracts = [...]string{
@@ -11,13 +12,22 @@ var thresholdContracts = [...]string{
 }
 
 func GetThresholdInfo() {
-	for _, contract := range thresholdContracts {
+	msg := ""
+
+	for i, contract := range thresholdContracts {
 		info := GetThresholdDynamicData(contract)
 		if nil == info {
 			return
 		}
+
+		if i == 0 {
+			msg = fmt.Sprintf("%s    %s", "tbtcv1", info.supply.String())
+		} else if i == 1 {
+			msg = fmt.Sprintf("%s\n%s    %s", msg, "tbtcv2", info.supply.String())
+		}
+
 		db.InsertOneDayInfo(info.date, info.contract, info.supply, info.price)
 	}
 
-	robot.DispatchThresholdInfo("xxx")
+	robot.DispatchThresholdInfo(msg)
 }
