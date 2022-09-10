@@ -1,17 +1,22 @@
 package main
 
-import "EthereumDataMiner/asset"
+import (
+	"EthereumDataMiner/asset"
+	"EthereumDataMiner/task"
+	"fmt"
+	"time"
+)
 
 func main() {
 
-	asset.GetThresholdInfo()
+	//asset.GetThresholdInfo()
 
-	//taskThreshold := func() {
-	//	fmt.Println("taskThreshold start------> ", time.Now())
-	//	asset.GetThresholdDynamicData()
-	//	fmt.Println("taskThreshold end------> ", time.Now())
-	//}
-	//
-	//task.StartTimerTask(2, taskThreshold)
-	//select {} //阻塞主线程停止
+	taskThreshold := func() {
+		fmt.Println("taskThreshold start------> ", time.Now())
+		asset.GetThresholdInfo()
+		fmt.Println("taskThreshold end------> ", time.Now())
+	}
+
+	task.StartTimerTask(10, taskThreshold)
+	select {} //阻塞主线程停止
 }

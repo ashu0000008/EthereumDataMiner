@@ -4,12 +4,17 @@ import (
 	"EthereumDataMiner/db"
 )
 
-const tbtcv2Contract = "0x18084fbA666a33d37592fA2633fD49a74DD93a88"
+var thresholdContracts = [...]string{
+	"0x18084fbA666a33d37592fA2633fD49a74DD93a88", //tbtcv2
+	"0x8dAEBADE922dF735c38C80C7eBD708Af50815fAa", //tbtcv1
+}
 
 func GetThresholdInfo() {
-	info := GetThresholdDynamicData(tbtcv2Contract)
-	if nil == info {
-		return
+	for _, contract := range thresholdContracts {
+		info := GetThresholdDynamicData(contract)
+		if nil == info {
+			return
+		}
+		db.InsertOneDayInfo(info.date, info.contract, info.supply, info.price)
 	}
-	db.InsertOneDayInfo(info.date, info.contract, info.supply, info.price)
 }

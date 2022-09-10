@@ -2,7 +2,6 @@ package db
 
 import (
 	"database/sql"
-	"log"
 	"math/big"
 )
 
@@ -29,24 +28,16 @@ func InsertOneDayInfo2(dateNow string, contract string, supply big.Float, price 
 
 func findInfo(db *sql.DB, dateS string, contract string) (*big.Float, *big.Float, error) {
 	//queryString := fmt.Sprintf("SELECT * from AssetDynamicInfo where contract=%s;", contract)
-	rsk := db.QueryRow("select * from AssetDynamicInfo where contract = ? and  dateF = ?", contract, dateS)
+	rsk := db.QueryRow("select supply,price from AssetSeeker.AssetDynamicInfo where contract = ? and  dateF = ?", contract, dateS)
 	if nil != rsk.Err() {
 		return nil, nil, rsk.Err()
 	} else {
 		var supply float64
 		var price float64
-		var values = make([]interface{}, 4)
-		log.Println(rsk)
-		rsk.Scan(values...)
-
-		//supplyF, err := strconv.ParseFloat(supply, 64)
-		//if nil == err {
-		//	return nil, nil, err
-		//}
-		//priceF, err := strconv.ParseFloat(price, 64)
-		//if nil == err {
-		//	return nil, nil, err
-		//}
+		err := rsk.Scan(&supply, &price)
+		if nil != err {
+			return nil, nil, err
+		}
 		return big.NewFloat(supply), big.NewFloat(price), nil
 	}
 }
@@ -60,7 +51,6 @@ func InsertOneDayInfo(dateNow string, contract string, supply big.Float, price b
 	_, _, err := findInfo(db, dateNow, contract)
 	if nil == err {
 		//update data
-
 		return
 	}
 
