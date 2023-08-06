@@ -9,7 +9,7 @@ import (
 
 func main() {
 
-	//asset.GetUSDInfo()
+	//asset.GetStakedETHInfo()
 
 	taskThreshold := func() {
 		fmt.Println("taskThreshold start------> ", time.Now())
@@ -31,9 +31,8 @@ func main() {
 
 	task.StartTimerTask(7, taskUsd)
 	task.StartTimerTask(8, taskStakedETH)
-	task.StartTimerTask(9, taskThreshold)
+	task.StartTimerTask(8, taskThreshold)
 
-	task.StartTimerTask(17, taskThreshold)
-	task.StartTimerTask(23, taskThreshold)
+	task.StartTimerTask(17, taskStakedETH)
 	select {} //阻塞主线程停止
 }

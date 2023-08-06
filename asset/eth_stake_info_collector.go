@@ -2,7 +2,6 @@ package asset
 
 import (
 	"EthereumDataMiner/db"
-	"EthereumDataMiner/robot"
 	"fmt"
 )
 
@@ -50,5 +49,5 @@ func GetStakedETHInfo() {
 		db.InsertOneDayInfo(info.date, info.contract, info.supply, info.price)
 	}
 
-	robot.DispatchThresholdInfo(msg)
+	//robot.DispatchThresholdInfo(msg)
 }
