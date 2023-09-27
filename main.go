@@ -2,6 +2,7 @@ package main
 
 import (
 	"EthereumDataMiner/asset"
+	"EthereumDataMiner/etherscan"
 	"EthereumDataMiner/task"
 	"fmt"
 	"time"
@@ -9,6 +10,7 @@ import (
 
 func main() {
 
+	etherscan.ShowGasPrice()
 	//asset.GetStakedETHInfo()
 
 	taskThreshold := func() {

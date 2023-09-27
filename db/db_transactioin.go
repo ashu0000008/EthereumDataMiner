@@ -6,6 +6,10 @@ import (
 )
 
 func SaveOneTransaction(trans model.DataTransaction) {
+	SaveTransaction("transaction", trans)
+}
+
+func SaveTransaction(tableName string, trans model.DataTransaction) {
 	db := GetDB()
 	if nil == db {
 		return
@@ -13,7 +17,7 @@ func SaveOneTransaction(trans model.DataTransaction) {
 
 	var stmt *sql.Stmt
 	var err error
-	stmt, err = db.Prepare("INSERT INTO transaction(txhash, block, from, to) values(?,?,?,?)")
+	stmt, err = db.Prepare("INSERT INTO " + tableName + "(txhash, block, from, to) values(?,?,?,?)")
 	if err != nil {
 		print(err)
 		return

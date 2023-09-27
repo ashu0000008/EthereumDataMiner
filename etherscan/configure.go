@@ -1,0 +1,3 @@
+package etherscan
+
+const KEY = "IMXXMWU6DY2KRZMA4A1G6VBRCVKI9ZS1TS"
